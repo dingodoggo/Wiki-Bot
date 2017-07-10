@@ -2,6 +2,10 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const prefix = "!";
 
+bot.on('ready', () => {
+        bot.user.setGame('!commands for help');
+});
+
 bot.on('message', (message) => {
 
     if (!message.content.startsWith(prefix)) return;

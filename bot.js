@@ -70,6 +70,38 @@ bot.on('message', (message) => {
                 break;
         }
     }
+
+    if (message.channel.id === '334783085512228887') {
+        switch (args[0].toLowerCase()) {
+            case "commands":
+                message.channel.send("The following are the commands used in this channel.");
+                message.channel.send({embed: {
+                    color: 3447003,
+                    fields: [{
+                        name: "!3dchar",
+                        value: "Syntax: !3dchar <Player>\nThis looks up the character page of your desire.",
+                    },
+                    {
+                        name: "!wiki",
+                        value: "Syntax: !wiki <query>\nThis searches the AQ3D wikidot for the query you have inputed.",
+                    }]
+                }});
+            break;
+            case "3dchar":
+                var char = charLook.split(" ");
+                if (typeof args[1] !== 'undefined') {
+                    message.channel.sendMessage("https://game.aq3d.com/account/Character?id=" + char.join("%20")); 
+                }
+                else message.channel.sendMessage("Please specify a name after !3dchar");
+                break;
+            case "wiki":
+                var term = query.split(" ");
+                if (typeof args[1] !== 'undefined') {
+                    message.channel.sendMessage("Wiki search: http://aq-3d.wikidot.com/search:site/q/" + term.join("%20")); }
+                else message.channel.sendMessage("Please specify what you want to search after !wiki");
+                break;
+        }
+    }
 });
 
 bot.login(process.env.BOT_TOKEN)

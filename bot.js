@@ -13,6 +13,7 @@ bot.on('message', (message) => {
     var args = message.content.substring(prefix.length).split(" ");
     var query = message.content.substring(6);
     var charLook = message.content.substring(9);
+    var 3dChar = message.content.substring(8);
 
     if (message.channel.id === '334783038162468864') {
         switch (args[0].toLowerCase()) {
@@ -88,7 +89,7 @@ bot.on('message', (message) => {
                 }});
             break;
             case "3dchar":
-                var char = charLook.split(" ");
+                var char = 3dChar.split(" ");
                 if (typeof args[1] !== 'undefined') {
                     message.channel.sendMessage("https://game.aq3d.com/account/Character?id=" + char.join("%20")); 
                 }

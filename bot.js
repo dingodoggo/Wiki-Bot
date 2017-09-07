@@ -71,7 +71,7 @@ bot.on('message', (message) => {
         }
     }
 
-    if (message.channel.id === '334783085512228887') {
+    if (message.channel.id === '355188935900790786') {
         switch (args[0].toLowerCase()) {
             case "commands":
                 message.channel.send("The following are the commands used in this channel.");

@@ -153,4 +153,4 @@ async function _3dCharInformation(username, message) {
     }
 }
 
-bot.login(process.env.BOT_TOKEN)
+bot.login('MzU1MjM4MDcyODY4MTQzMTE0.DJTjeg.pSo2U0z3d66KHxKIyi5EWYWBfx0')

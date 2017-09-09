@@ -22,7 +22,7 @@ bot.on('message', (message) => {
     var charLook = message.content.substring(9);
     var aqChar = message.content.substring(8);
 
-    if (message.channel.id === '334783038162468864' || '248515210082648064') {
+    if (message.channel.id === '334783038162468864' || '248515210082648064' || '355397955169288192') {
         switch (args[0].toLowerCase()) {
             case "commands":
                 message.channel.send("The following are the commands used in this channel.");
@@ -68,7 +68,7 @@ bot.on('message', (message) => {
                 else if (price > 0 || price == 0) {
                         message.channel.sendMessage("Please enter a non-zero positive integer."); 
                 }
-                else message.channel.sendMessage("That's not a number!");
+                else message.channel.sendMessage("That's not right!");
                 break;
             case "wiki":
                 var term = query.split(" ");
@@ -96,6 +96,7 @@ bot.on('message', (message) => {
                 }});
             break;
             case "3dchar":
+                var char = aqChar.split(" ");
                 if (typeof args[1] !== 'undefined') {
                     message.channel.sendMessage("https://game.aq3d.com/account/Character?id=" + char.join("%20")); 
                 }

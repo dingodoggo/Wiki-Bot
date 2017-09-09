@@ -1,10 +1,17 @@
 const Discord = require('discord.js');
+const cheerio = require('cheerio');
+const request = require('superagent');
+
+// Discord client
 const bot = new Discord.Client();
+
+
 const prefix = "!";
 
 bot.on('ready', () => {
         bot.user.setGame('!commands for help');
 });
+
 
 bot.on('message', (message) => {
 
@@ -72,7 +79,7 @@ bot.on('message', (message) => {
         }
     }
 
-    if (message.channel.id === '355188935900790786') {
+    if (message.channel.id === '355188935900790786' || '355397955169288192') {
         switch (args[0].toLowerCase()) {
             case "commands":
                 message.channel.send("The following are the commands used in this channel.");
@@ -89,11 +96,25 @@ bot.on('message', (message) => {
                 }});
             break;
             case "3dchar":
-                var char = aqChar.split(" ");
-                if (typeof args[1] !== 'undefined') {
-                    message.channel.sendMessage("https://game.aq3d.com/account/Character?id=" + char.join("%20")); 
-                }
-                else message.channel.sendMessage("Please specify a name after !3dchar");
+                  let char = aqChar.split(" ");
+                  if (typeof args[1] !== 'undefined') {
+                    const username = char.join('%20');
+                    _3dCharInformation(username, message).then((information) => {
+                      if (information === null) return message.channel.sendMessage('Character not found!');
+
+                      const embed = new Discord.RichEmbed()
+                        .setTitle(information.username)
+                        .setColor('DARK_RED')
+                        .addField('Class', information.class, true)
+                        .addField('Level', information.level, true)
+                        .addField('Badges', information.badges.length <= 0 ? 'None' : information.badges)
+                        .setImage(information.classImage)
+                        .addField('Link',`https://game.aq3d.com/account/Character?id=${username}`);
+
+                      message.channel.send({ embed });
+                    });
+                  }
+                  else message.channel.sendMessage("Please specify a name after !3dchar");
                 break;
             case "wiki":
                 var term = query.split(" ");
@@ -104,5 +125,32 @@ bot.on('message', (message) => {
         }
     }
 });
+
+
+async function _3dCharInformation(username, message) {
+    try {
+        console.log(username);
+        const { text } = await request.get(`https://game.aq3d.com/account/Character?id=${username}`);
+        const $ = cheerio.load(text);
+
+        // Checks to see if the character exists
+        let level = $('.text-big').text().replace('Level', '');
+        if (level === '') return null;
+
+        let badges = [];
+        $('.h4').each(function(i, element) { badges.push($(this).text()) });
+
+        return {
+          username: $('h1').text(),
+          level: level,
+          badges: badges,
+          class: $('div.row').children('img').attr('alt'),
+          classImage: `https://game.aq3d.com${$('div.row').children('img').attr('src')}`,
+        };
+
+    } catch (error) {
+      message.channel.sendMessage('The request could not be made!');
+    }
+}
 
 bot.login(process.env.BOT_TOKEN)

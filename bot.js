@@ -22,7 +22,7 @@ bot.on('message', (message) => {
     var charLook = message.content.substring(9);
     var aqChar = message.content.substring(8);
 
-    if (message.channel.id === '334783038162468864' || '248515210082648064') {
+    if (message.channel.id === '334783038162468864' || '248515210082648064' || '355397955169288192') {
         switch (args[0].toLowerCase()) {
             case "commands":
                 message.channel.send("The following are the commands used in this channel.");

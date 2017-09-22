@@ -95,13 +95,6 @@ bot.on('message', (message) => {
                     }]
                 }});
             break;
-           /* case "3dchar":
-                var char = aqChar.split(" ");
-                if (typeof args[1] !== 'undefined') {
-                    message.channel.sendMessage("https://game.aq3d.com/account/Character?id=" + char.join("%20")); 
-                }
-                else message.channel.sendMessage("Please specify a name after !3dchar");
-                break; */
             case "wiki":
                 var term = query.split(" ");
                 if (typeof args[1] !== 'undefined') {
@@ -111,5 +104,5 @@ bot.on('message', (message) => {
         }
     }
 });
-
-bot.login('MzU1MjM4MDcyODY4MTQzMTE0.DKcxNw.lczUqB0eXEWhpKwMqTNn-t-UhWk')
+var token = process.env.BOT_TOKEN;
+bot.login(token)

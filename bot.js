@@ -22,7 +22,7 @@ bot.on('message', (message) => {
     var charLook = message.content.substring(9);
     var aqChar = message.content.substring(8);
 
-    if (message.channel.id === '334783038162468864' || '248515210082648064' || '355397955169288192') {
+    if (message.channel.id === '334783038162468864' || '248515210082648064') {
         switch (args[0].toLowerCase()) {
             case "commands":
                 message.channel.send("The following are the commands used in this channel.");
@@ -45,7 +45,7 @@ bot.on('message', (message) => {
             case "aqwchar":
                 var char = charLook.split(" ");
                 if (typeof args[1] !== 'undefined') {
-                    message.channel.sendMessage("http://www.aq.com/character.asp?id=" + char.join("%20")); 
+                    message.channel.sendMessage("Link: http://www.aq.com/character.asp?id=" + char.join("%20")); 
                 }
                 else message.channel.sendMessage("Please specify a name after !aqwchar");
                 break;
@@ -66,7 +66,7 @@ bot.on('message', (message) => {
                     else message.reply("Please use the following syntax: !sellback <Price> <AC/Gold>")
                 }
                 else if (price > 0 || price == 0) {
-                        message.channel.sendMessage("Please enter a non-zero positive integer."); 
+                        message.channel.sendMessage("Please enter a (smaller) non-zero positive integer."); 
                 }
                 else message.channel.sendMessage("That's not right!");
                 break;
@@ -79,7 +79,7 @@ bot.on('message', (message) => {
         }
     }
 
-    if (message.channel.id === '355188935900790786' || '355397955169288192') {
+    if (message.channel.id === '355188935900790786') {
         switch (args[0].toLowerCase()) {
             case "commands":
                 message.channel.send("The following are the commands used in this channel.");
@@ -95,13 +95,13 @@ bot.on('message', (message) => {
                     }]
                 }});
             break;
-            case "3dchar":
+           /* case "3dchar":
                 var char = aqChar.split(" ");
                 if (typeof args[1] !== 'undefined') {
                     message.channel.sendMessage("https://game.aq3d.com/account/Character?id=" + char.join("%20")); 
                 }
                 else message.channel.sendMessage("Please specify a name after !3dchar");
-                break;
+                break; */
             case "wiki":
                 var term = query.split(" ");
                 if (typeof args[1] !== 'undefined') {
